@@ -1,8 +1,28 @@
-const {readFileSync, writeFileSync} = require('fs');
+const { readFile, writeFile } = require('fs');
 
-const first = readFileSync('./content/first.txt', 'utf-8');
-const second = readFileSync('./content/second.txt', 'utf-8');
+readFile('./content/first.txt', 'utf8', (error, first) => {
+  if (error) {
+    console.log(error);
+    return;
+  }
 
-console.log(first, second);
+  readFile('./content/second.txt', 'utf8', (error, second) => {
+    if (error) {
+      console.log(error);
+      return;
+    }
 
-writeFileSync('./content/result-sync.txt', `Here is the result ${first}, ${second}`, {flag: 'a'});
+    const result = `Here is the result: ${first}, ${second}`;
+
+    writeFile('./content/result-async.txt', result, (error) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      console.log('The file has been saved!');
+    });
+  });
+});
+
+// In summary, this code reads the contents of two files, combines them into a single string, and writes that string to a new file. If an error occurs at any point, it logs the error and stops execution.
