@@ -1,12 +1,16 @@
-const publicNames = require('./names');
+const os = require('os');
 
-// n Node.js, when you require a module, all the code in that module is executed. So, if there’s a function call in the module (like printResult() in your mind-grenade.js), it will be executed when the module is required.
+const userI = os.userInfo();
 
-// In your code, require('./mind-grenade.js'); is requiring the mind-grenade.js module. If mind-grenade.js contains a function call at the top level (not inside a function or conditional statement), that function will be executed immediately when the module is required.
+console.log(userI); 
 
-// This behavior allows modules to run setup code, such as initializing data structures, registering event handlers, or anything else that needs to happen before the module’s functions can be used.
+console.log(`The system uptime is ${os.uptime()} seconds.`);
 
-// So, the function in mind-grenade.js is being called because it’s invoked at the top level in the mind-grenade.js module, and that module is being required in your current module.
-require('./mind-grenade.js');
+const currentOS = {
+  name: os.type(),
+  release: os.release(),
+  totalMem: os.totalmem(),
+  freeMem: os.freemem()
+};
 
-console.log(publicNames);
+console.log(currentOS);
