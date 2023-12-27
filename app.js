@@ -1,16 +1,12 @@
-const os = require('os');
+const path = require('path');
 
-const userI = os.userInfo();
+console.log(path.sep);
 
-console.log(userI); 
+const filePath = path.join('/content///', 'sub-content', 'test.txt');
 
-console.log(`The system uptime is ${os.uptime()} seconds.`);
+// Print a normalized file path
+console.log(filePath);
 
-const currentOS = {
-  name: os.type(),
-  release: os.release(),
-  totalMem: os.totalmem(),
-  freeMem: os.freemem()
-};
-
-console.log(currentOS);
+// Print whole path
+const absolute = path.resolve(__dirname, 'content', 'sub-content', 'test.txt');
+console.log(absolute);
